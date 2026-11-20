@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixNear — Verified home service professionals, near you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12213C;
+    --ink-soft:#1D3057;
+    --paper:#F3F4EE;
+    --paper-raised:#FFFFFF;
+    --amber:#E2932E;
+    --amber-deep:#C97A18;
+    --verified:#2E8B57;
+    --verified-soft:#E4F2EA;
+    --danger:#C24C3E;
+    --danger-soft:#FBEAE7;
+    --slate:#5B6472;
+    --slate-light:#8A93A0;
+    --line:#DBDCD2;
+    --radius-card: 14px;
+    --radius-pill: 999px;
+    --shadow-card: 0 1px 2px rgba(18,33,60,0.06), 0 8px 20px -12px rgba(18,33,60,0.18);
+    --font-head:'Archivo', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;}
+  a{color:inherit;}
+  input,select,textarea{font-family:inherit;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  @media (max-width:640px){ .wrap{padding:0 18px;} }
+
+  /* ---------- Header ---------- */
+  header.site{position:sticky;top:0;z-index:40;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.08);}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:16px;}
+  .logo{display:flex;align-items:center;gap:8px;font-family:var(--font-head);font-weight:800;font-size:20px;color:#fff;letter-spacing:-0.01em;}
+  .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(226,147,46,0.22);}
+  .nav-links{display:flex;gap:24px;align-items:center;}
+  .nav-links a{color:rgba(255,255,255,0.72);text-decoration:none;font-size:14px;font-weight:500;transition:color .15s;white-space:nowrap;}
+  .nav-links a:hover{color:#fff;}
+  .nav-right{display:flex;align-items:center;gap:10px;}
+  .nav-cta{background:var(--amber);color:var(--ink);border:none;padding:10px 18px;border-radius:var(--radius-pill);font-weight:700;font-size:14px;white-space:nowrap;}
+  .nav-cta:hover{background:#EDA23F;}
+  .nav-ghost{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:#fff;padding:9px 16px;border-radius:var(--radius-pill);font-weight:600;font-size:13.5px;}
+  @media (max-width:900px){ .nav-links{display:none;} }
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--ink);background-image:radial-gradient(circle at 82% 18%, rgba(226,147,46,0.16), transparent 45%);color:#fff;padding:64px 0 0;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:start;padding-bottom:56px;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:13.5px;color:rgba(255,255,255,0.6);}
+  .eyebrow-row .badge-mini{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);padding:5px 10px;border-radius:var(--radius-pill);color:#fff;font-weight:600;font-size:12.5px;}
+  h1.hero-head{font-family:var(--font-head);font-weight:800;font-size:clamp(32px, 4.8vw, 50px);line-height:1.1;letter-spacing:-0.01em;margin:0 0 20px;}
+  h1.hero-head .in{color:var(--amber);}
+  .hero-sub{font-size:17px;line-height:1.6;color:rgba(255,255,255,0.72);max-width:480px;margin:0 0 32px;}
+  .hero-stats{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap;}
+  .hstat b{display:block;font-family:var(--font-head);font-size:24px;font-weight:700;color:#fff;}
+  .hstat span{font-size:13px;color:rgba(255,255,255,0.55);}
+
+  .finder{background:var(--paper-raised);border-radius:18px;padding:26px;box-shadow:0 20px 50px -18px rgba(0,0,0,0.5);color:var(--ink);}
+  .finder-title{font-family:var(--font-head);font-weight:700;font-size:18px;margin:0 0 4px;}
+  .finder-sub{font-size:13.5px;color:var(--slate);margin:0 0 18px;}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .cat-tile{border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;transition:border-color .15s, transform .1s, background .15s;}
+  .cat-tile:hover{border-color:var(--amber);background:#FFF9EF;transform:translateY(-1px);}
+  .cat-tile .ic{font-size:22px;}
+  .cat-tile span{font-size:12.5px;font-weight:600;color:var(--ink-soft);line-height:1.25;}
+  .finder-loc{margin-top:16px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--slate);border-top:1px dashed var(--line);padding-top:14px;}
+  .finder-loc b{color:var(--ink);}
+
+  /* ---------- Sections ---------- */
+  section{padding:72px 0;}
+  .section-tag{font-size:13px;font-weight:700;color:var(--amber-deep);margin:0 0 10px;}
+  h2.section-head{font-family:var(--font-head);font-weight:700;font-size:clamp(26px,3.4vw,34px);letter-spacing:-0.01em;margin:0 0 14px;max-width:600px;}
+  .section-sub{color:var(--slate);font-size:15.5px;max-width:560px;line-height:1.6;margin:0 0 40px;}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);}
+  @media (max-width:820px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .steps{grid-template-columns:1fr;} }
+  .step{padding:26px 22px 26px 0;border-right:1px solid var(--line);}
+  .step:last-child{border-right:none;}
+  .step-num{font-family:var(--font-head);font-size:14px;font-weight:700;color:var(--amber-deep);margin-bottom:14px;}
+  .step h3{font-size:16.5px;margin:0 0 8px;font-family:var(--font-head);font-weight:700;}
+  .step p{font-size:13.8px;color:var(--slate);line-height:1.55;margin:0;}
+
+  .trust-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media (max-width:860px){ .trust-wrap{grid-template-columns:1fr;} }
+  .trust-list{list-style:none;margin:0;padding:0;}
+  .trust-list li{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--line);}
+  .trust-list li:last-child{border-bottom:1px solid var(--line);}
+  .trust-ic{width:34px;height:34px;border-radius:9px;background:var(--verified-soft);color:var(--verified);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+  .trust-list h4{margin:0 0 3px;font-size:15px;font-family:var(--font-head);font-weight:700;}
+  .trust-list p{margin:0;font-size:13.5px;color:var(--slate);line-height:1.5;}
+
+  .id-card{background:var(--ink);border-radius:16px;padding:26px;color:#fff;box-shadow:var(--shadow-card);}
+  .id-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;}
+  .id-top .who{display:flex;gap:12px;align-items:center;}
+  .avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:17px;color:#12213C;}
+  .id-top .name{font-weight:700;font-size:16px;font-family:var(--font-head);}
+  .id-top .role{font-size:12.5px;color:rgba(255,255,255,0.55);}
+  .verified-chip{display:inline-flex;align-items:center;gap:5px;background:var(--verified-soft);color:var(--verified);padding:4px 10px;border-radius:var(--radius-pill);font-size:12px;font-weight:700;}
+  .id-meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+  .id-meta div{background:rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;}
+  .id-meta span{display:block;font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:3px;}
+  .id-meta b{font-size:14.5px;font-weight:700;}
+  .aadhaar-strip{margin-top:18px;padding-top:16px;border-top:1px dashed rgba(255,255,255,0.18);display:flex;align-items:center;gap:10px;font-size:12.5px;color:rgba(255,255,255,0.6);}
+
+  footer{background:var(--ink);color:rgba(255,255,255,0.6);padding:48px 0 28px;font-size:13.5px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;padding-bottom:32px;}
+  @media (max-width:700px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  .foot-grid h5{color:#fff;font-size:13px;margin:0 0 12px;font-family:var(--font-head);}
+  .foot-grid ul{list-style:none;margin:0;padding:0;}
+  .foot-grid li{margin-bottom:9px;}
+  .foot-grid a{text-decoration:none;color:inherit;cursor:pointer;}
+  .foot-grid a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;}
+
+  /* ---------- App overlay shell ---------- */
+  #app-overlay{position:fixed;inset:0;background:var(--paper);z-index:100;display:none;overflow-y:auto;}
+  #app-overlay.open{display:block;}
+  .app-top{position:sticky;top:0;background:var(--ink);color:#fff;z-index:5;}
+  .app-top-row{display:flex;align-items:center;gap:14px;padding:16px 0;}
+  .back-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .app-top-title{font-family:var(--font-head);font-weight:700;font-size:16px;}
+  .app-top-sub{font-size:12px;color:rgba(255,255,255,0.55);}
+  .app-body{padding:32px 0 70px;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px;}
+  .chip{border:1.5px solid var(--line);background:#fff;padding:11px 16px;border-radius:var(--radius-pill);font-size:14px;font-weight:600;color:var(--ink-soft);}
+  .chip.sel, .chip:hover{border-color:var(--amber);}
+  .chip.sel{background:var(--amber);color:var(--ink);border-color:var(--amber);}
+
+  .urgency-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 30px;}
+  @media (max-width:560px){ .urgency-row{grid-template-columns:1fr;} }
+  .urgency-card{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:20px;text-align:left;}
+  .urgency-card.sel{border-color:var(--ink);box-shadow:0 0 0 1.5px var(--ink) inset;}
+  .urgency-card .u-ic{font-size:20px;margin-bottom:10px;}
+  .urgency-card h4{margin:0 0 6px;font-family:var(--font-head);font-size:15.5px;}
+  .urgency-card p{margin:0;font-size:13px;color:var(--slate);line-height:1.5;}
+
+  .primary-btn{background:var(--ink);color:#fff;border:none;padding:14px 26px;border-radius:var(--radius-pill);font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;}
+  .primary-btn:disabled{opacity:0.35;cursor:not-allowed;}
+  .primary-btn:not(:disabled):hover{background:var(--ink-soft);}
+  .amber-btn{background:var(--amber);color:var(--ink);border:none;padding:10px 18px;border-radius:var(--radius-pill);font-weight:700;font-size:13.5px;}
+  .amber-btn:hover{background:#EDA23F;}
+  .ghost-btn{background:none;border:1.5px solid var(--line);color:var(--ink);padding:12px 18px;border-radius:var(--radius-pill);font-weight:600;font-size:13.8px;}
+  .danger-btn{background:var(--danger-soft);color:var(--danger);border:none;padding:10px 16px;border-radius:var(--radius-pill);font-weight:700;font-size:13px;}
+
+  .list-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:22px;}
+  .mode-toggle{display:inline-flex;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-pill);padding:3px;}
+  .mode-toggle button{border:none;background:none;padding:9px 16px;border-radius:var(--radius-pill);font-size:13.5px;font-weight:600;color:var(--slate);}
+  .mode-toggle button.active{background:var(--ink);color:#fff;}
+
+  .pro-grid{display:flex;flex-direction:column;gap:14px;}
+  .pro-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:18px;display:flex;gap:16px;align-items:center;box-shadow:var(--shadow-card);position:relative;}
+  @media (max-width:600px){ .pro-card{flex-wrap:wrap;} }
+  .pro-avatar{width:56px;height:56px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:19px;color:#fff;}
+  .pro-info{flex:1;min-width:180px;}
+  .pro-name-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .pro-name{font-family:var(--font-head);font-weight:700;font-size:16px;}
+  .v-badge{display:inline-flex;align-items:center;gap:3px;color:var(--verified);background:var(--verified-soft);padding:2px 8px;border-radius:var(--radius-pill);font-size:11px;font-weight:700;}
+  .pending-badge{display:inline-flex;align-items:center;gap:3px;color:var(--amber-deep);background:#FBEEDB;padding:2px 8px;border-radius:var(--radius-pill);font-size:11px;font-weight:700;}
+  .pro-role{font-size:13px;color:var(--slate);margin:2px 0 8px;}
+  .pro-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12.8px;color:var(--slate);}
+  .pro-meta b{color:var(--ink);}
+  .avail-dot{display:inline-flex;align-items:center;gap:5px;font-weight:600;}
+  .avail-dot.on{color:var(--verified);}
+  .avail-dot.off{color:var(--slate-light);}
+  .avail-dot .d{width:7px;height:7px;border-radius:50%;background:currentColor;}
+  .pro-action{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+  .pro-price{font-size:12px;color:var(--slate-light);}
+
+  .searching-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 20px;}
+  .radar{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle, rgba(46,139,87,0.18), transparent 70%);display:flex;align-items:center;justify-content:center;position:relative;margin-bottom:26px;}
+  .radar::before, .radar::after{content:"";position:absolute;border-radius:50%;border:1.5px solid rgba(46,139,87,0.35);inset:0;animation:ping 2.2s ease-out infinite;}
+  .radar::after{animation-delay:1.1s;}
+  @keyframes ping{0%{transform:scale(0.35);opacity:0.9;}100%{transform:scale(1);opacity:0;}}
+  .radar .core{width:56px;height:56px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:2;}
+  .searching-wrap h3{font-family:var(--font-head);font-size:19px;margin:0 0 8px;}
+  .searching-wrap p{color:var(--slate);font-size:14px;max-width:320px;margin:0 0 22px;}
+  .searching-log{font-size:12.5px;color:var(--slate-light);display:flex;flex-direction:column;gap:6px;}
+
+  .confirm-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-card);}
+  .confirm-head{background:var(--verified-soft);color:var(--verified);padding:20px 22px;display:flex;align-items:center;gap:12px;}
+  .confirm-head .ok-ic{width:36px;height:36px;border-radius:50%;background:var(--verified);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .confirm-head h3{margin:0;font-family:var(--font-head);font-size:17px;}
+  .confirm-head p{margin:2px 0 0;font-size:12.5px;color:#2f6b4c;}
+  .confirm-body{padding:22px;}
+  .confirm-pro{display:flex;gap:14px;align-items:center;padding-bottom:18px;border-bottom:1px dashed var(--line);margin-bottom:18px;}
+  .confirm-rows div{display:flex;justify-content:space-between;padding:9px 0;font-size:13.8px;border-bottom:1px solid #F0F0EA;}
+  .confirm-rows div span:first-child{color:var(--slate);}
+  .confirm-rows div span:last-child{font-weight:600;text-align:right;}
+  .confirm-actions{display:flex;gap:12px;padding:20px 22px;border-top:1px solid var(--line);flex-wrap:wrap;}
+
+  .empty-note{text-align:center;color:var(--slate-light);font-size:13.5px;padding:30px 0;}
+
+  /* ---------- Forms (login/signup) ---------- */
+  .auth-card{max-width:420px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:var(--shadow-card);}
+  .auth-tabs{display:flex;background:var(--paper);border-radius:var(--radius-pill);padding:3px;margin-bottom:22px;}
+  .auth-tabs button{flex:1;border:none;background:none;padding:9px 0;border-radius:var(--radius-pill);font-size:13.5px;font-weight:600;color:var(--slate);}
+  .auth-tabs button.active{background:var(--ink);color:#fff;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12.5px;font-weight:600;color:var(--slate);margin-bottom:6px;}
+  .field input, .field select{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;background:#fff;color:var(--ink);}
+  .field input:focus, .field select:focus{outline:none;border-color:var(--ink);}
+  .form-hint{font-size:12px;color:var(--slate-light);margin:-6px 0 16px;}
+  .switch-mode{text-align:center;font-size:13px;color:var(--slate);margin-top:16px;}
+  .switch-mode a{color:var(--amber-deep);font-weight:600;text-decoration:none;cursor:pointer;}
+
+  /* ---------- Dashboards ---------- */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px;}
+  @media (max-width:760px){ .stat-grid{grid-template-columns:1fr 1fr;} }
+  .stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;}
+  .stat-card b{display:block;font-family:var(--font-head);font-size:26px;font-weight:700;}
+  .stat-card span{font-size:12.5px;color:var(--slate);}
+
+  .dash-section{margin-bottom:36px;}
+  .dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .dash-head h3{font-family:var(--font-head);font-size:17px;margin:0;}
+  .dash-head span{font-size:12.5px;color:var(--slate);}
+
+  .req-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:12px;box-shadow:var(--shadow-card);flex-wrap:wrap;}
+  .req-left b{display:block;font-family:var(--font-head);font-size:15px;}
+  .req-left span{font-size:12.8px;color:var(--slate);}
+  .req-actions{display:flex;gap:8px;}
+
+  .bar-chart{display:flex;flex-direction:column;gap:12px;}
+  .bar-row{display:grid;grid-template-columns:120px 1fr 46px;align-items:center;gap:12px;font-size:13px;}
+  .bar-track{background:#EBEBE2;border-radius:6px;height:10px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;background:var(--amber);}
+
+  .table-simple{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .table-simple th{text-align:left;font-size:11.5px;text-transform:none;color:var(--slate);background:var(--paper);padding:12px 16px;font-weight:600;}
+  .table-simple td{padding:13px 16px;font-size:13.5px;border-top:1px solid var(--line);}
+  .table-simple tr:hover td{background:#FAFAF6;}
+
+  .verify-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .verify-box.done{background:var(--verified-soft);border-color:#bfe0cc;}
+  .verify-box h4{margin:0 0 4px;font-family:var(--font-head);font-size:15px;}
+  .verify-box p{margin:0;font-size:12.8px;color:var(--slate);}
+
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:var(--radius-pill);font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,0.25);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+</style>
+</head>
+<body>
+
+<!-- ============ MARKETING SITE ============ -->
+<header class="site">
+  <div class="wrap nav-row">
+    <div class="logo"><span class="dot"></span>FixNear</div>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#trust">Verification</a>
+      <a href="#categories">Services</a>
+      <a href="#" onclick="event.preventDefault(); openApp('view-mybookings');">My bookings</a>
+      <a href="#" onclick="event.preventDefault(); openApp('view-partner-gate');">Partner portal</a>
+    </nav>
+    <div class="nav-right">
+      <button class="nav-ghost" onclick="openApp('view-customer-gate')">Log in</button>
+      <button class="nav-cta" onclick="openApp('view-problem')">Get help now</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-row"><span class="badge-mini">🪪 Aadhaar-verified professionals</span></div>
+      <h1 class="hero-head">Home repairs, done by <span class="in">verified</span> hands.</h1>
+      <p class="hero-sub">No more calling an unknown number and hoping for the best. Every professional on FixNear is identity-verified — you just describe the problem, and we find trusted help nearby.</p>
+      <div class="hero-stats">
+        <div class="hstat"><b>6</b><span>Service categories</span></div>
+        <div class="hstat"><b>100%</b><span>ID-verified partners</span></div>
+        <div class="hstat"><b>&lt;30 min</b><span>Average response time</span></div>
+      </div>
+    </div>
+
+    <div class="finder" id="categories">
+      <p class="finder-title">What needs fixing?</p>
+      <p class="finder-sub">Pick a category and we'll show verified professionals near you.</p>
+      <div class="cat-grid" id="cat-grid"></div>
+      <div class="finder-loc">📍 Showing professionals near <b>Ludhiana, Punjab</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <p class="section-tag">Process</p>
+    <h2 class="section-head">Trusted help at your door, in four steps.</h2>
+    <p class="section-sub">Whether you need someone right now or want to pick a specific professional yourself, both ways are built in.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Describe the problem</h3><p>Pick a category, like Electrician, then choose the exact issue — such as "fan not working."</p></div>
+      <div class="step"><div class="step-num">02</div><h3>See who's nearby</h3><p>Get a list of verified professionals near you, with rating, distance and availability.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Request or book</h3><p>Need it now? Send an instant request — whoever accepts first gets the job. Or choose someone yourself.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Get it fixed</h3><p>The professional arrives and finishes the job. Rate them afterwards, and it's saved to your history.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="trust" style="background:#EDEEE6;">
+  <div class="wrap trust-wrap">
+    <div>
+      <p class="section-tag">Trust</p>
+      <h2 class="section-head">Verification is the core of FixNear.</h2>
+      <p class="section-sub" style="margin-bottom:26px;">Every new professional goes through an Aadhaar-based identity check when they register — that's when their profile earns the "Verified" badge.</p>
+      <ul class="trust-list">
+        <li><div class="trust-ic">✓</div><div><h4>Aadhaar-based ID check</h4><p>Every professional's identity is verified at registration, to keep fake profiles off the platform.</p></div></li>
+        <li><div class="trust-ic">★</div><div><h4>Ratings &amp; completed jobs</h4><p>Every booking ends with a rating, shown publicly on the professional's profile.</p></div></li>
+        <li><div class="trust-ic">◎</div><div><h4>Live availability</h4><p>Professionals set their own status — Available or Busy — in real time.</p></div></li>
+      </ul>
+    </div>
+    <div class="id-card">
+      <div class="id-top">
+        <div class="who">
+          <div class="avatar" style="background:#E2932E;">RK</div>
+          <div><div class="name">Ravi Kumar</div><div class="role">Electrician · Ludhiana</div></div>
+        </div>
+        <span class="verified-chip">✓ Verified</span>
+      </div>
+      <div class="id-meta">
+        <div><span>Experience</span><b>6 years</b></div>
+        <div><span>Rating</span><b>4.8 ★ (312)</b></div>
+        <div><span>Jobs completed</span><b>540</b></div>
+        <div><span>Distance</span><b>1.2 km away</b></div>
+      </div>
+      <div class="aadhaar-strip">🪪 Identity verified via Aadhaar on registration</div>
+    </div>
+  </div>
+</section>
+
+<section id="partner">
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:20px;padding:40px;">
+    <div style="max-width:520px;">
+      <p class="section-tag" style="color:var(--amber);">For professionals</p>
+      <h2 class="section-head" style="color:#fff;">Are you an electrician, plumber or technician? Get nearby requests.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.65);margin-bottom:0;">Register, verify your identity with Aadhaar, and start accepting service requests in your area.</p>
+    </div>
+    <button class="amber-btn" style="padding:14px 24px;font-size:14.5px;" onclick="openApp('view-partner-gate')">Become a partner →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="logo" style="margin-bottom:12px;"><span class="dot"></span>FixNear</div>
+      <p style="max-width:260px;line-height:1.6;">A location-based home-service platform that connects users with nearby verified electricians, plumbers and technicians.</p>
+    </div>
+    <div><h5>Services</h5><ul id="foot-cats"></ul></div>
+    <div><h5>Company</h5><ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#trust">Verification</a></li>
+      <li><a onclick="openApp('view-partner-gate')">Partners</a></li>
+      <li><a onclick="openApp('view-admin-gate')">Admin</a></li>
+    </ul></div>
+    <div><h5>Support</h5><ul><li><a href="#">Help center</a></li><li><a href="#">Report an issue</a></li><li><a href="#">Contact us</a></li></ul></div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 FixNear. Prototype build.</span>
+    <span>Built for trusted home services.</span>
+  </div>
+</footer>
+
+<!-- ============ APP OVERLAY ============ -->
+<div id="app-overlay">
+  <div class="app-top">
+    <div class="wrap app-top-row">
+      <button class="back-btn" onclick="goBack()">←</button>
+      <div>
+        <div class="app-top-title" id="app-title">FixNear</div>
+        <div class="app-top-sub" id="app-sub"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap app-body">
+
+    <!-- ===== CUSTOMER: booking flow ===== -->
+    <div class="view" id="view-problem">
+      <p class="section-sub" style="margin-bottom:0;">Select the exact issue so we can match the right professional.</p>
+      <div class="chip-row" id="problem-chips"></div>
+      <p class="section-sub" style="margin-bottom:0;">When do you need this?</p>
+      <div class="urgency-row">
+        <button class="urgency-card" data-u="now" onclick="selectUrgency('now')">
+          <div class="u-ic">⚡</div><h4>Right now</h4>
+          <p>Instant request — sent to nearby professionals, whoever accepts first is on the way.</p>
+        </button>
+        <button class="urgency-card" data-u="schedule" onclick="selectUrgency('schedule')">
+          <div class="u-ic">📋</div><h4>I'll choose myself</h4>
+          <p>Browse nearby professionals and pick based on rating, distance and experience.</p>
+        </button>
+      </div>
+      <button class="primary-btn" id="continue-btn" disabled onclick="goToList()">Continue →</button>
+    </div>
+
+    <div class="view" id="view-list">
+      <div class="list-toolbar">
+        <div>
+          <div style="font-family:var(--font-head);font-weight:700;font-size:17px;" id="list-heading">Nearby electricians</div>
+          <div style="font-size:13px;color:var(--slate);" id="list-sub">Sorted by distance</div>
+        </div>
+        <div class="mode-toggle" id="mode-toggle">
+          <button class="active" data-mode="direct" onclick="setMode('direct')">Choose myself</button>
+          <button data-mode="instant" onclick="setMode('instant')">Instant request</button>
+        </div>
+      </div>
+      <div id="instant-cta" style="display:none;margin-bottom:18px;">
+        <button class="primary-btn" onclick="startInstantRequest()">⚡ Send request to nearby professionals</button>
+      </div>
+      <div class="pro-grid" id="pro-grid"></div>
+    </div>
+
+    <div class="view" id="view-searching">
+      <div class="searching-wrap">
+        <div class="radar"><div class="core">⚡</div></div>
+        <h3>Sending your request…</h3>
+        <p id="searching-text">Notifying available professionals near you.</p>
+        <div class="searching-log" id="searching-log"></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-confirm"></div>
+
+    <!-- ===== CUSTOMER: login / signup ===== -->
+    <div class="view" id="view-customer-gate">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="active" id="cust-tab-login" onclick="setAuthTab('login')">Log in</button>
+          <button id="cust-tab-signup" onclick="setAuthTab('signup')">Sign up</button>
+        </div>
+        <div id="cust-signup-fields" style="display:none;">
+          <div class="field"><label>Full name</label><input type="text" id="cust-name" placeholder="e.g. Priya Sharma"></div>
+        </div>
+        <div class="field"><label>Phone number</label><input type="tel" id="cust-phone" placeholder="10-digit mobile number"></div>
+        <p class="form-hint">This is a prototype — no OTP is actually sent.</p>
+        <button class="primary-btn" style="width:100%;justify-content:center;" onclick="customerLogin()">Continue</button>
+        <p class="switch-mode">Are you a service professional? <a onclick="openApp('view-partner-gate')">Go to Partner portal</a></p>
+      </div>
+    </div>
+
+    <!-- ===== CUSTOMER: my bookings dashboard ===== -->
+    <div class="view" id="view-mybookings">
+      <div class="dash-head"><h3 id="cust-welcome">My bookings</h3><span id="cust-badge"></span></div>
+      <div id="bookings-list"></div>
+    </div>
+
+    <!-- ===== PARTNER: login / signup ===== -->
+    <div class="view" id="view-partner-gate">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="active" id="partner-tab-login" onclick="setPartnerTab('login')">Log in</button>
+          <button id="partner-tab-signup" onclick="setPartnerTab('signup')">Register</button>
+        </div>
+        <div id="partner-signup-fields" style="display:none;">
+          <div class="field"><label>Full name</label><input type="text" id="partner-name" placeholder="e.g. Ravi Kumar"></div>
+          <div class="field"><label>Service category</label>
+            <select id="partner-category"></select>
+          </div>
+        </div>
+        <div class="field"><label>Phone number</label><input type="tel" id="partner-phone" placeholder="10-digit mobile number"></div>
+        <p class="form-hint">Registration normally requires Aadhaar verification before you go live — simulated on the next screen.</p>
+        <button class="primary-btn" style="width:100%;justify-content:center;" onclick="partnerLogin()">Continue</button>
+        <p class="switch-mode">Looking for a professional instead? <a onclick="openApp('view-customer-gate')">Go to customer login</a></p>
+      </div>
+    </div>
+
+    <!-- ===== PARTNER: dashboard ===== -->
+    <div class="view" id="view-partner-dashboard">
+      <div class="verify-box" id="verify-box">
+        <div>
+          <h4 id="verify-title">Verification pending</h4>
+          <p id="verify-desc">Verify your identity with Aadhaar to start receiving requests and show the Verified badge on your profile.</p>
+        </div>
+        <button class="amber-btn" id="verify-btn" onclick="runVerification()">Verify with Aadhaar</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card"><b id="pd-jobs">0</b><span>Jobs completed</span></div>
+        <div class="stat-card"><b id="pd-rating">—</b><span>Average rating</span></div>
+        <div class="stat-card"><b id="pd-earn">₹0</b><span>Earnings this week</span></div>
+        <div class="stat-card"><b id="pd-pending">0</b><span>Pending requests</span></div>
+      </div>
+
+      <div class="dash-section">
+        <div class="dash-head"><h3>Incoming requests</h3><span>New requests from nearby customers</span></div>
+        <div id="partner-requests"></div>
+      </div>
+
+      <div class="dash-section">
+        <div class="dash-head"><h3>Recent job history</h3><span>Your completed and accepted jobs</span></div>
+        <table class="table-simple">
+          <thead><tr><th>Customer</th><th>Problem</th><th>Distance</th><th>Status</th></tr></thead>
+          <tbody id="partner-history"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== ADMIN: login ===== -->
+    <div class="view" id="view-admin-gate">
+      <div class="auth-card">
+        <div style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:4px;">Admin login</div>
+        <p class="form-hint" style="margin-bottom:18px;">Internal dashboard — any details work in this prototype.</p>
+        <div class="field"><label>Admin username</label><input type="text" id="admin-user" placeholder="admin"></div>
+        <div class="field"><label>Password</label><input type="password" id="admin-pass" placeholder="••••••••"></div>
+        <button class="primary-btn" style="width:100%;justify-content:center;" onclick="adminLogin()">Log in</button>
+      </div>
+    </div>
+
+    <!-- ===== ADMIN: dashboard ===== -->
+    <div class="view" id="view-admin-dashboard">
+      <div class="stat-grid">
+        <div class="stat-card"><b>2,340</b><span>Total customers</span></div>
+        <div class="stat-card"><b>486</b><span>Total partners</span></div>
+        <div class="stat-card"><b>402</b><span>Verified partners</span></div>
+        <div class="stat-card"><b id="admin-bookings">6,120</b><span>Total bookings</span></div>
+      </div>
+
+      <div class="dash-section">
+        <div class="dash-head"><h3>Bookings by category</h3><span>Last 30 days</span></div>
+        <div class="bar-chart" id="admin-bars"></div>
+      </div>
+
+      <div class="dash-section">
+        <div class="dash-head"><h3>Pending verifications</h3><span>New partner registrations awaiting Aadhaar check</span></div>
+        <div id="admin-pending"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= Mock data ================= */
+const CATEGORIES = {
+  electrician: { label:"Electrician", icon:"💡",
+    problems:["Fan not working","Light / switch issue","New wiring","Short circuit","MCB / fuse problem"],
+    people:[
+      {name:"Ravi Kumar", exp:6, rating:4.8, reviews:312, jobs:540, dist:1.2, avail:true, color:"#E2932E", price:"₹150 visiting"},
+      {name:"Aman Verma", exp:4, rating:4.7, reviews:198, jobs:340, dist:2.1, avail:true, color:"#3B6FA0", price:"₹150 visiting"},
+      {name:"Rohit Sharma", exp:9, rating:4.9, reviews:501, jobs:812, dist:2.8, avail:false, color:"#5B8F62", price:"₹200 visiting"},
+      {name:"Deepak Singh", exp:3, rating:4.5, reviews:97, jobs:150, dist:3.4, avail:true, color:"#9C5CB0", price:"₹150 visiting"}
+    ]},
+  washing: { label:"Washing Machine", icon:"🧺",
+    problems:["Not spinning","Water not draining","Installation needed","Strange noise","Not powering on"],
+    people:[
+      {name:"Suresh Yadav", exp:7, rating:4.6, reviews:220, jobs:410, dist:1.6, avail:true, color:"#3B6FA0", price:"₹200 visiting"},
+      {name:"Manoj Kumar", exp:5, rating:4.7, reviews:180, jobs:300, dist:2.4, avail:true, color:"#E2932E", price:"₹200 visiting"},
+      {name:"Ajay Rathi", exp:2, rating:4.3, reviews:60, jobs:90, dist:3.0, avail:false, color:"#5B8F62", price:"₹180 visiting"}
+    ]},
+  ac: { label:"AC Technician", icon:"❄️",
+    problems:["No cooling","Gas refill needed","AC servicing","New installation","Water leakage"],
+    people:[
+      {name:"Vikas Chauhan", exp:8, rating:4.9, reviews:410, jobs:700, dist:1.0, avail:true, color:"#3B6FA0", price:"₹250 visiting"},
+      {name:"Naveen Joshi", exp:5, rating:4.6, reviews:150, jobs:260, dist:1.9, avail:true, color:"#9C5CB0", price:"₹250 visiting"},
+      {name:"Harpreet Singh", exp:10, rating:4.8, reviews:520, jobs:900, dist:2.6, avail:false, color:"#E2932E", price:"₹300 visiting"}
+    ]},
+  plumber: { label:"Plumber", icon:"🚿",
+    problems:["Tap leaking","Pipe burst","Bathroom fitting","Drain blockage","Water tank issue"],
+    people:[
+      {name:"Sunil Prasad", exp:6, rating:4.7, reviews:260, jobs:430, dist:0.9, avail:true, color:"#5B8F62", price:"₹150 visiting"},
+      {name:"Ramesh Gupta", exp:4, rating:4.5, reviews:140, jobs:210, dist:1.7, avail:true, color:"#3B6FA0", price:"₹150 visiting"},
+      {name:"Iqbal Khan", exp:9, rating:4.9, reviews:390, jobs:600, dist:2.3, avail:true, color:"#E2932E", price:"₹180 visiting"}
+    ]},
+  carpenter: { label:"Carpenter", icon:"🪚",
+    problems:["Furniture repair","New fitting","Door / window issue","Assembly needed","Polishing"],
+    people:[
+      {name:"Balwant Rai", exp:12, rating:4.8, reviews:330, jobs:590, dist:1.4, avail:true, color:"#9C5CB0", price:"₹200 visiting"},
+      {name:"Jagdish Chand", exp:7, rating:4.6, reviews:170, jobs:290, dist:2.2, avail:false, color:"#3B6FA0", price:"₹200 visiting"},
+      {name:"Om Prakash", exp:5, rating:4.4, reviews:98, jobs:150, dist:3.1, avail:true, color:"#E2932E", price:"₹180 visiting"}
+    ]},
+  painter: { label:"Painter", icon:"🎨",
+    problems:["Full home painting","Single room painting","Wall crack fixing","Waterproofing","Touch-up work"],
+    people:[
+      {name:"Mahesh Thakur", exp:8, rating:4.7, reviews:210, jobs:340, dist:1.1, avail:true, color:"#E2932E", price:"Free site visit"},
+      {name:"Nitin Kohli", exp:6, rating:4.6, reviews:160, jobs:250, dist:2.0, avail:true, color:"#5B8F62", price:"Free site visit"},
+      {name:"Sanjay Mehta", exp:11, rating:4.9, reviews:400, jobs:610, dist:2.9, avail:false, color:"#3B6FA0", price:"Free site visit"}
+    ]}
+};
+
+const ADMIN_BAR_DATA = [
+  {label:"Electrician", value:1840}, {label:"Plumber", value:1420}, {label:"AC Technician", value:1180},
+  {label:"Washing Machine", value:860}, {label:"Carpenter", value:520}, {label:"Painter", value:300}
+];
+const ADMIN_PENDING = [
+  {name:"Deepak Singh", category:"Electrician", phone:"98xxxxxx12"},
+  {name:"Ajay Rathi", category:"Washing Machine", phone:"97xxxxxx45"},
+  {name:"Om Prakash", category:"Carpenter", phone:"96xxxxxx78"}
+];
+const PARTNER_INCOMING = [
+  {customer:"Neha Malhotra", problem:"Fan not working", dist:1.4, address:"Model Town, Ludhiana"},
+  {customer:"Karan Bedi", problem:"Short circuit near switchboard", dist:2.0, address:"Civil Lines, Ludhiana"}
+];
+
+/* ================= State ================= */
+let state = { catKey:null, problem:null, urgency:null, mode:"direct", chosenPro:null, confirmMode:null };
+let viewStack = [];
+let session = {
+  customer: null,          // {name, phone}
+  partner: null,           // {name, phone, category, verified}
+  admin: false,
+  bookings: [],            // customer booking history (accumulated this session)
+  partnerRequests: PARTNER_INCOMING.map(r => ({...r, status:"pending"})),
+  partnerHistory: [
+    {customer:"Simran Kaur", problem:"Light / switch issue", dist:1.1, status:"Completed"},
+    {customer:"Yash Arora", problem:"MCB / fuse problem", dist:1.9, status:"Completed"}
+  ]
+};
+
+/* ================= Home page setup ================= */
+const catGrid = document.getElementById('cat-grid');
+const footCats = document.getElementById('foot-cats');
+const partnerCategorySelect = document.getElementById('partner-category');
+Object.entries(CATEGORIES).forEach(([key, cat]) => {
+  const tile = document.createElement('button');
+  tile.className = 'cat-tile';
+  tile.innerHTML = `<span class="ic">${cat.icon}</span><span>${cat.label}</span>`;
+  tile.onclick = () => { openApp('view-problem'); beginFlow(key); };
+  catGrid.appendChild(tile);
+
+  const li = document.createElement('li');
+  li.innerHTML = `<a onclick="openApp('view-problem'); beginFlow('${key}');">${cat.label}</a>`;
+  footCats.appendChild(li);
+
+  const opt = document.createElement('option');
+  opt.value = key; opt.textContent = cat.label;
+  partnerCategorySelect.appendChild(opt);
+});
+
+/* ================= Overlay / routing ================= */
+const TITLES = {
+  'view-problem': ['Book a service', "Choose what's wrong"],
+  'view-list': ['Nearby professionals', 'Verified and ready to help'],
+  'view-searching': ['Sending request', 'Please wait'],
+  'view-confirm': ['Booking summary', ''],
+  'view-customer-gate': ['Customer log in', 'Access your bookings'],
+  'view-mybookings': ['My bookings', 'Your booking history'],
+  'view-partner-gate': ['Partner portal', 'Register or log in'],
+  'view-partner-dashboard': ['Partner dashboard', ''],
+  'view-admin-gate': ['Admin login', 'Internal access only'],
+  'view-admin-dashboard': ['Admin dashboard', 'Platform overview']
+};
+
+function openApp(viewId){
+  document.getElementById('app-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  viewStack = [];
+  if(viewId === 'view-problem' && !state.catKey){ beginFlow('electrician'); return; }
+  if(viewId === 'view-mybookings'){ renderBookings(); }
+  if(viewId === 'view-partner-gate' && session.partner){ viewId = 'view-partner-dashboard'; renderPartnerDashboard(); }
+  if(viewId === 'view-admin-gate' && session.admin){ viewId = 'view-admin-dashboard'; renderAdminDashboard(); }
+  const [title, sub] = TITLES[viewId] || ['FixNear',''];
+  showView(viewId, title, sub);
+}
+function closeApp(){
+  document.getElementById('app-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function showView(id, title, sub){
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('app-title').textContent = title;
+  document.getElementById('app-sub').textContent = sub;
+  viewStack.push(id);
+}
+function goBack(){
+  if(viewStack.length <= 1){ closeApp(); return; }
+  viewStack.pop();
+  const prev = viewStack.pop();
+  const [title, sub] = TITLES[prev] || ['FixNear',''];
+  showView(prev, title, sub);
+}
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ================= Customer: booking flow ================= */
+function beginFlow(catKey){
+  state = { catKey, problem:null, urgency:null, mode:"direct", chosenPro:null, confirmMode:null };
+  const cat = CATEGORIES[catKey];
+  const chipRow = document.getElementById('problem-chips');
+  chipRow.innerHTML = '';
+  cat.problems.forEach(p => {
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.textContent = p;
+    chip.onclick = () => selectProblem(p, chip);
+    chipRow.appendChild(chip);
+  });
+  document.querySelectorAll('.urgency-card').forEach(c => c.classList.remove('sel'));
+  document.getElementById('continue-btn').disabled = true;
+}
+function selectProblem(p, el){
+  state.problem = p;
+  document.querySelectorAll('#problem-chips .chip').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  checkContinue();
+}
+function selectUrgency(u){
+  state.urgency = u;
+  state.mode = (u === 'now') ? 'instant' : 'direct';
+  document.querySelectorAll('.urgency-card').forEach(c => c.classList.remove('sel'));
+  document.querySelector(`.urgency-card[data-u="${u}"]`).classList.add('sel');
+  checkContinue();
+}
+function checkContinue(){
+  document.getElementById('continue-btn').disabled = !(state.problem && state.urgency);
+}
+function goToList(){
+  renderList();
+  const cat = CATEGORIES[state.catKey];
+  showView('view-list', cat.label, `Request: ${state.problem}`);
+  setMode(state.mode);
+}
+function setMode(mode){
+  state.mode = mode;
+  document.querySelectorAll('#mode-toggle button').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('instant-cta').style.display = (mode === 'instant') ? 'block' : 'none';
+  document.querySelectorAll('.pro-card .amber-btn').forEach(b => b.style.display = (mode === 'direct') ? 'inline-block' : 'none');
+}
+function renderList(){
+  const cat = CATEGORIES[state.catKey];
+  const people = [...cat.people].sort((a,b) => a.dist - b.dist);
+  document.getElementById('list-heading').textContent = `Nearby ${cat.label.toLowerCase()}s`;
+  document.getElementById('list-sub').textContent = `${people.length} professionals found · sorted by distance`;
+  const grid = document.getElementById('pro-grid');
+  grid.innerHTML = '';
+  people.forEach(person => {
+    const card = document.createElement('div');
+    card.className = 'pro-card';
+    card.innerHTML = `
+      <div class="pro-avatar" style="background:${person.color}">${initials(person.name)}</div>
+      <div class="pro-info">
+        <div class="pro-name-row"><span class="pro-name">${person.name}</span><span class="v-badge">✓ Verified</span></div>
+        <div class="pro-role">${cat.label} · ${person.exp} yrs experience</div>
+        <div class="pro-meta">
+          <span>⭐ <b>${person.rating}</b> (${person.reviews})</span>
+          <span>🛠️ <b>${person.jobs}</b> jobs done</span>
+          <span>📍 <b>${person.dist} km</b> away</span>
+          <span class="avail-dot ${person.avail ? 'on':'off'}"><span class="d"></span>${person.avail ? 'Available now':'Busy'}</span>
+        </div>
+      </div>
+      <div class="pro-action">
+        <span class="pro-price">${person.price}</span>
+        <button class="amber-btn" ${!person.avail ? 'disabled style="opacity:.4;"' : ''} onclick='directBook(${JSON.stringify(person)})'>Book now</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+function initials(name){ return name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase(); }
+
+function startInstantRequest(){
+  const cat = CATEGORIES[state.catKey];
+  const available = cat.people.filter(p => p.avail);
+  showView('view-searching', cat.label, 'Sending request…');
+  document.getElementById('searching-text').textContent = `Notifying available ${cat.label.toLowerCase()}s near you.`;
+  const log = document.getElementById('searching-log');
+  log.innerHTML = '';
+  const steps = [
+    `Request sent: "${state.problem}"`,
+    `${available.length} nearby ${cat.label.toLowerCase()}s notified`,
+    `Waiting for someone to accept…`
+  ];
+  steps.forEach((s, i) => setTimeout(() => {
+    const line = document.createElement('div');
+    line.textContent = '• ' + s;
+    log.appendChild(line);
+  }, i * 650));
+  setTimeout(() => {
+    const winner = available[Math.floor(Math.random() * available.length)] || cat.people[0];
+    state.chosenPro = winner;
+    state.confirmMode = 'instant';
+    showConfirmation();
+  }, steps.length * 650 + 700);
+}
+function directBook(person){
+  state.chosenPro = person;
+  state.confirmMode = 'direct';
+  showConfirmation();
+}
+function showConfirmation(){
+  const cat = CATEGORIES[state.catKey];
+  const p = state.chosenPro;
+  const eta = Math.max(8, Math.round(p.dist * 9));
+  const view = document.getElementById('view-confirm');
+  const headline = state.confirmMode === 'instant' ? 'Request accepted!' : 'Booking confirmed!';
+  const subline = state.confirmMode === 'instant' ? `${p.name} accepted your request.` : `Your booking with ${p.name} is confirmed.`;
+  view.innerHTML = `
+    <div class="confirm-card">
+      <div class="confirm-head"><div class="ok-ic">✓</div><div><h3>${headline}</h3><p>${subline}</p></div></div>
+      <div class="confirm-body">
+        <div class="confirm-pro">
+          <div class="pro-avatar" style="background:${p.color}">${initials(p.name)}</div>
+          <div>
+            <div class="pro-name-row"><span class="pro-name">${p.name}</span><span class="v-badge">✓ Verified</span></div>
+            <div class="pro-role">${cat.label} · ${p.exp} yrs · ⭐ ${p.rating} (${p.reviews})</div>
+          </div>
+        </div>
+        <div class="confirm-rows">
+          <div><span>Problem</span><span>${state.problem}</span></div>
+          <div><span>Location</span><span>Your saved address, Ludhiana</span></div>
+          <div><span>Distance</span><span>${p.dist} km away</span></div>
+          <div><span>Estimated arrival</span><span>${eta} mins</span></div>
+          <div><span>Visiting charge</span><span>${p.price}</span></div>
+          <div><span>Status</span><span style="color:var(--verified);">Confirmed</span></div>
+        </div>
+      </div>
+      <div class="confirm-actions">
+        <button class="primary-btn" onclick="closeApp()">Done</button>
+        <button class="ghost-btn" onclick="openApp('view-problem'); beginFlow(state.catKey);">Book another service</button>
+      </div>
+    </div>
+  `;
+  session.bookings.unshift({
+    category: cat.label, problem: state.problem, pro: p.name, eta, price: p.price,
+    status: 'Confirmed', mode: state.confirmMode
+  });
+  showView('view-confirm', cat.label, 'Booking summary');
+}
+
+/* ================= Customer: login + bookings ================= */
+function setAuthTab(mode){
+  const isLogin = mode === 'login';
+  document.getElementById('cust-tab-login').classList.toggle('active', isLogin);
+  document.getElementById('cust-tab-signup').classList.toggle('active', !isLogin);
+  document.getElementById('cust-signup-fields').style.display = isLogin ? 'none' : 'block';
+}
+function customerLogin(){
+  const phone = document.getElementById('cust-phone').value.trim();
+  const nameField = document.getElementById('cust-name');
+  const name = (nameField && nameField.value.trim()) || 'Customer';
+  if(!phone){ toast('Enter a phone number to continue'); return; }
+  session.customer = { name: name, phone };
+  toast(`Welcome, ${session.customer.name.split(' ')[0]}!`);
+  openApp('view-mybookings');
+}
+function renderBookings(){
+  document.getElementById('cust-welcome').textContent = session.customer
+    ? `${session.customer.name.split(' ')[0]}'s bookings` : 'My bookings';
+  document.getElementById('cust-badge').textContent = session.customer ? '' : 'Log in to see your history';
+  const list = document.getElementById('bookings-list');
+  if(!session.customer){
+    list.innerHTML = `<p class="empty-note">You're not logged in yet.</p>
+      <div style="text-align:center;"><button class="primary-btn" onclick="openApp('view-customer-gate')">Log in</button></div>`;
+    return;
+  }
+  if(session.bookings.length === 0){
+    list.innerHTML = `<p class="empty-note">No bookings yet — get started from the home page.</p>
+      <div style="text-align:center;"><button class="primary-btn" onclick="openApp('view-problem')">Book a service</button></div>`;
+    return;
+  }
+  list.innerHTML = session.bookings.map(b => `
+    <div class="req-card">
+      <div class="req-left">
+        <b>${b.problem}</b>
+        <span>${b.category} · with ${b.pro} · ETA ${b.eta} mins · ${b.price}</span>
+      </div>
+      <span class="v-badge">${b.status}</span>
+    </div>
+  `).join('');
+}
+
+/* ================= Partner: login + dashboard ================= */
+function setPartnerTab(mode){
+  const isLogin = mode === 'login';
+  document.getElementById('partner-tab-login').classList.toggle('active', isLogin);
+  document.getElementById('partner-tab-signup').classList.toggle('active', !isLogin);
+  document.getElementById('partner-signup-fields').style.display = isLogin ? 'none' : 'block';
+}
+function partnerLogin(){
+  const phone = document.getElementById('partner-phone').value.trim();
+  const nameField = document.getElementById('partner-name');
+  const catField = document.getElementById('partner-category');
+  const name = (nameField && nameField.value.trim()) || 'Partner';
+  if(!phone){ toast('Enter a phone number to continue'); return; }
+  session.partner = { name, phone, category: catField.value || 'electrician', verified: false };
+  toast(`Welcome, ${session.partner.name.split(' ')[0]}!`);
+  openApp('view-partner-dashboard');
+}
+function renderPartnerDashboard(){
+  if(!session.partner){ openApp('view-partner-gate'); return; }
+  const p = session.partner;
+  const box = document.getElementById('verify-box');
+  const btn = document.getElementById('verify-btn');
+  if(p.verified){
+    box.classList.add('done');
+    document.getElementById('verify-title').textContent = 'Identity verified';
+    document.getElementById('verify-desc').textContent = 'Your Aadhaar verification is complete. Your profile now shows the Verified badge.';
+    btn.style.display = 'none';
+  } else {
+    box.classList.remove('done');
+    document.getElementById('verify-title').textContent = 'Verification pending';
+    document.getElementById('verify-desc').textContent = 'Verify your identity with Aadhaar to start receiving requests and show the Verified badge on your profile.';
+    btn.style.display = 'inline-block';
+    btn.textContent = 'Verify with Aadhaar';
+    btn.disabled = false;
+  }
+  document.getElementById('pd-jobs').textContent = session.partnerHistory.filter(h => h.status === 'Completed').length;
+  document.getElementById('pd-rating').textContent = '4.7 ★';
+  document.getElementById('pd-earn').textContent = '₹4,250';
+  document.getElementById('pd-pending').textContent = session.partnerRequests.filter(r => r.status === 'pending').length;
+
+  renderPartnerRequests();
+  renderPartnerHistory();
+}
+function runVerification(){
+  const btn = document.getElementById('verify-btn');
+  btn.disabled = true;
+  btn.textContent = 'Verifying…';
+  setTimeout(() => {
+    session.partner.verified = true;
+    toast('Identity verified — you can now receive requests');
+    renderPartnerDashboard();
+  }, 1400);
+}
+function renderPartnerRequests(){
+  const wrap = document.getElementById('partner-requests');
+  const pending = session.partnerRequests.filter(r => r.status === 'pending');
+  if(!session.partner.verified){
+    wrap.innerHTML = `<p class="empty-note">Complete Aadhaar verification to start receiving requests.</p>`;
+    return;
+  }
+  if(pending.length === 0){
+    wrap.innerHTML = `<p class="empty-note">No new requests right now.</p>`;
+    return;
+  }
+  wrap.innerHTML = pending.map((r, i) => `
+    <div class="req-card">
+      <div class="req-left">
+        <b>${r.customer} — ${r.problem}</b>
+        <span>${r.address} · ${r.dist} km away</span>
+      </div>
+      <div class="req-actions">
+        <button class="danger-btn" onclick="respondRequest(${i}, 'declined')">Decline</button>
+        <button class="amber-btn" onclick="respondRequest(${i}, 'accepted')">Accept</button>
+      </div>
+    </div>
+  `).join('');
+}
+function respondRequest(index, decision){
+  const pending = session.partnerRequests.filter(r => r.status === 'pending');
+  const target = pending[index];
+  target.status = decision;
+  if(decision === 'accepted'){
+    session.partnerHistory.unshift({ customer: target.customer, problem: target.problem, dist: target.dist, status: 'Accepted — en route' });
+    toast(`Request from ${target.customer} accepted`);
+  } else {
+    toast(`Request from ${target.customer} declined`);
+  }
+  renderPartnerDashboard();
+}
+function renderPartnerHistory(){
+  const body = document.getElementById('partner-history');
+  body.innerHTML = session.partnerHistory.map(h => `
+    <tr><td>${h.customer}</td><td>${h.problem}</td><td>${h.dist} km</td><td>${h.status}</td></tr>
+  `).join('');
+}
+
+/* ================= Admin ================= */
+function adminLogin(){
+  session.admin = true;
+  toast('Welcome back, Admin');
+  openApp('view-admin-dashboard');
+}
+function renderAdminDashboard(){
+  const max = Math.max(...ADMIN_BAR_DATA.map(d => d.value));
+  document.getElementById('admin-bars').innerHTML = ADMIN_BAR_DATA.map(d => `
+    <div class="bar-row">
+      <span>${d.label}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${(d.value/max*100).toFixed(0)}%"></div></div>
+      <span>${d.value}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('admin-pending').innerHTML = ADMIN_PENDING.map((p, i) => `
+    <div class="req-card" id="admin-pending-${i}">
+      <div class="req-left"><b>${p.name}</b><span>${CATEGORIES[Object.keys(CATEGORIES).find(k => CATEGORIES[k].label.toLowerCase().includes(p.category.toLowerCase().split(' ')[0])) ] ? p.category : p.category} · ${p.phone}</span></div>
+      <div class="req-actions">
+        <button class="danger-btn" onclick="adminDecide(${i}, 'Rejected')">Reject</button>
+        <button class="amber-btn" onclick="adminDecide(${i}, 'Approved')">Approve</button>
+      </div>
+    </div>
+  `).join('');
+}
+function adminDecide(i, decision){
+  const el = document.getElementById(`admin-pending-${i}`);
+  el.innerHTML = `<div class="req-left"><b>${ADMIN_PENDING[i].name}</b><span>${decision}</span></div>`;
+  toast(`${ADMIN_PENDING[i].name} ${decision.toLowerCase()}`);
+}
+</script>
+</body>
+</html>
